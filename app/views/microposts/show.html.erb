@@ -17,6 +17,7 @@
         
     <%= form_with(model: @comment, local:true) do |f| %>
       <div class="form-group">
+        <%= render 'layouts/error_messages', model: f.object %>
         <h5 class="mt-4"><%= f.label :content, '返答' %></h5>
         <%= f.hidden_field :micropost_id ,  value: @micropost.id %>
         <%= f.text_area :content, class: 'form-control' , rows: 5%>

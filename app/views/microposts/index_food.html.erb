@@ -23,6 +23,7 @@
   </div>
   <%= form_with(model: @food, local:true) do |f| %>
     <div class="form-group">
+      <%= render 'layouts/error_messages', model: f.object %>
       <h5 class="mt-4"><%= f.label :contents, '質問を追加' %></h5>
       <%= f.hidden_field :category ,  value: "食事" %>
       <%= f.text_area :contents, class: 'form-control' , rows: 5%>
