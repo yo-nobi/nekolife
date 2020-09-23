@@ -5,8 +5,8 @@
         <h2>棲み家について</h2>
       </div>
     </div>
-    <div class="card mt-3">
-      <div class="card-header">
+    <div class="card mt-4">
+      <div class="card-header text-center">
         <h5>質問事項</h5>
       </div>
       <div class="card-body">
@@ -19,8 +19,9 @@
             　<% end %>
             </li>　　
           </div>
-      </div>
         <% end %>
+      </div>
+    </div>
     <%= form_with(model: @live, local:true) do |f| %>
       <div class="form-group">
         <%= render 'layouts/error_messages', model: f.object %>
@@ -59,10 +60,11 @@
       </div>
     </div>
     <div class='text-center mt-4'>
-      <%= image_tag '/images/cat2.jpg', size: "500x250" %>
-    </div>
-    <div class='text-center mt-4'>
       <%= link_to 'トップページへ', root_url %>
     </div>
+    <div class='text-center mt-4 cat2'>
+      <%= image_tag '/images/cat2.jpg' %>
+    </div>
+    
   <% end %>  
 </div>
