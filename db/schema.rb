@@ -10,7 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_01_110045) do
+ActiveRecord::Schema.define(version: 2020_09_12_130511) do
+
+  create_table "cats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.date "birthday"
+    t.string "variety"
+    t.string "contents"
+    t.string "image"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cats_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "content"
+    t.bigint "micropost_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["micropost_id"], name: "index_comments_on_micropost_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "microposts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "contents"
+    t.string "comments"
+    t.string "category"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_microposts_on_user_id"
+  end
+
+  create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -20,4 +62,10 @@ ActiveRecord::Schema.define(version: 2020_09_01_110045) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cats", "users"
+  add_foreign_key "comments", "microposts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "microposts", "users"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "follow_id"
 end

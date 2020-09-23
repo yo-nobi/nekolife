@@ -1,0 +1,67 @@
+<div id="live">
+  <% if logged_in? %> 
+    <div class='container'>
+      <div class='text-center'>
+        <h2>棲み家について</h2>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5>質問事項</h5>
+      </div>
+      <div class="card-body">
+        <% @lives.each do |live| %>
+          <div class='container'>
+            <li>
+              <%=link_to live.contents, live %>
+            　<% if current_user == live.user %>
+              　<%= link_to "Delete", live, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            　<% end %>
+            </li>　　
+          </div>
+      </div>
+        <% end %>
+    <%= form_with(model: @live, local:true) do |f| %>
+      <div class="form-group">
+        <h5 class="mt-4"><%= f.label :contents, '質問を追加' %></h5>
+        <%= f.hidden_field :category ,  value: "棲み家" %>
+        <%= f.text_area :contents, class: 'form-control' , rows: 5%>
+      </div>
+      <div class='text-center'>
+        <%= f.submit '投稿', class: 'btn btn-primary btn' %>   
+      </div>
+    <% end %>
+    
+    <div class='text-center mt-4'>
+      <%= link_to 'トップページへ', root_url %>
+    </div>
+    
+  <% else %>
+    <div class='container'>
+      
+      <div class='text-center mb-5'>
+        <h2>棲み家について</h2>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header text-center">
+        質問事項
+      </div>
+      <div class="card-body">
+        <% @lives.each do |live| %>
+          <div class='text-center'>
+            <li>
+              <%=link_to live.contents, live %>
+            </li>　　
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class='text-center mt-4'>
+      <%= image_tag '/images/cat2.jpg', size: "500x250" %>
+    </div>
+    <div class='text-center mt-4'>
+      <%= link_to 'トップページへ', root_url %>
+    </div>
+  <% end %>  
+</div>

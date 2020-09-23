@@ -1,0 +1,40 @@
+<% if logged_in? %>  
+  <div class="title text-center m-5">
+    <h1><strong>みんなの猫自慢</strong></h1>
+    <h3 class="mt-4">みんなの猫</h3>
+  </div>
+  
+  <%= render 'cats', cats: @cats %>
+  
+  <div class="text-center mt-5">
+    <%= link_to '私の猫一覧', mycats_path %>  |  <%= link_to 'トップページへ', root_url %>
+  </div>
+  
+<% else %>
+　<div class="title text-center m-5">
+    <h1><strong>みんなの猫自慢</strong></h1>
+    <h3 class="mt-4">みんなの猫</h3>
+  </div>
+  
+  <% if @cats.any? %>
+    <ul class="list-unstyled">
+        <table class="table">
+          <% @cats.each do |cat| %>
+            <tr>
+              <td><%= image_tag cat.image_url(:thumb) if cat.image_url %></td>
+              <td><%= cat.name %></td>
+              <td><%= cat.birthday %></td>
+              <td><%= cat.variety %></td>
+            </tr>
+          <% end %> 
+        </table>
+    </ul>
+    <%= paginate @cats %>
+  
+    <div class="text-center mt-5">
+      <%= link_to 'トップページへ', root_url %>
+    </div>
+  <% end %>
+<% end %>
+
+

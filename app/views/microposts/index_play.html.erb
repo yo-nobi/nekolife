@@ -1,0 +1,66 @@
+<% if logged_in? %> 
+  <div class='container'>
+    <div class='text-center'>
+      <h2>遊びについて</h2>
+    </div>
+  </div>
+  <div class="card mt-4">
+      <div class="card-header text-center">
+        <h5>質問事項</h5>
+      </div>
+      <div class="card-body">
+        <% @plays.each do |play| %>
+          <div class='container'>
+            <li>
+              <%=link_to play.contents, play %>
+            　<% if current_user == play.user %>
+              　<%= link_to "Delete", play, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm' %>
+            　<% end %>
+            </li>　　
+          </div>
+        <% end %>
+      </div>
+  </div>
+  <%= form_with(model: @play, local:true) do |f| %>
+    <div class="form-group">
+      <h5 class="mt-4"><%= f.label :contents, '質問を追加' %></h5>
+      <%= f.hidden_field :category ,  value: "遊び" %>
+      <%= f.text_area :contents, class: 'form-control' , rows: 5%>
+    </div>
+    <div class='text-center'>
+      <%= f.submit '投稿', class: 'btn btn-primary btn' %>   
+    </div>
+  <% end %>
+  
+  <div class='text-center mt-4'>
+    <%= link_to 'トップページへ', root_url %>
+  </div>
+  
+  
+<% else %>
+  <div class='container'>
+    <div class='text-center'>
+      <h2>遊びについて</h2>
+    </div>
+  </div>
+  <div class="card mt-4">
+      <div class="card-header text-center">
+        質問事項
+      </div>
+      <div class="card-body">
+        <% @plays.each do |play| %>
+          <div class='container text-center'>
+            <li>
+              <%=link_to play.contents, play %>
+            </li>
+          </div>
+        <% end %>
+      </div>
+  </div>
+  <div class='text-center mt-4'>
+    <%= image_tag '/images/cat4.jpg', size: "600x350" %>
+  </div>
+  <div class='text-center mt-4'>
+    <%= link_to 'トップページへ', root_url %>
+  </div>
+<% end %>

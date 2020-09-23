@@ -1,0 +1,19 @@
+<% if @cats.any? %>
+  <ul class="list-unstyled">
+      <table class="table">
+        <% @cats.each do |cat| %>
+          <tr>
+            <td><%= image_tag cat.image_url(:thumb) if cat.image_url %></td>
+            <td><%=link_to cat.name, cat_path(cat) %></td>
+            <td><%= cat.birthday %></td>
+            <td><%= cat.variety %></td>
+          </tr>
+        <% end %> 
+      </table>
+        
+  </ul>
+<% end %>
+
+<%= paginate @cats %>
+
+

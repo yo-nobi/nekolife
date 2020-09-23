@@ -1,8 +1,31 @@
-<% if logged_in? %>
-  <p>ログイン完了ユーザー:<%= current_user.name %></p>
-<% else %>
-  <div class="text-center">
-    <h1><strong>ネコ生活</strong></h1>
-    <p>大切な家族の猫の話をしよう！</p>
-  </div>
-<% end %>
+<div id="toppage">
+  <% if logged_in? %>
+    <div class="text-center">
+      <h1><strong>ネコ生活</strong></h1>
+    </div>
+    <div class='text-center mt-4'>
+      <%= image_tag '/images/cat3.jpg', size: "450x350" %>
+    </div>
+    <div class='link'>
+      <%= link_to '猫自慢', yourcats_path %>
+      <%= link_to '食事', food_path %>
+      <%= link_to '棲み家', live_path %> 
+      <%= link_to '遊び', play_path %>
+    </div>
+      
+  <% else %>
+    <div class="text-center">
+      <h1><strong>ネコ生活</strong></h1>
+    </div>
+    <div class='text-center mt-4'>
+      <%= image_tag '/images/cat3.jpg', size: "450x350" %>
+    </div>
+    <div class='link'>
+        <%= link_to '猫一覧', yourcats_path %>
+        <%= link_to '食事', food_path %>
+        <%= link_to '棲み家', live_path %> 
+        <%= link_to '遊び', play_path %>
+    </div>
+      
+  <% end %>
+</div>  
