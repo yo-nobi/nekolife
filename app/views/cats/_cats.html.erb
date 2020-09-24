@@ -5,9 +5,9 @@
           <tr>
             <td><%= image_tag cat.image_url(:thumb) if cat.image_url %></td>
             <td><%= link_to cat.name, cat_path(cat) %>
-            　
+            　<% if current_user == cat.user %>
                 <%= link_to "Delete", cat, method: :delete, data: { confirm:  "You sure?" }, class: 'btn btn-danger btn-sm' %>
-              
+              <% end %>
           　</td>
             <td><%= cat.birthday %></td>
             <td><%= cat.variety %></td>
