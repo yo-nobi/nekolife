@@ -45,7 +45,7 @@ class CatsController < ApplicationController
   end
   
   def destroy
-    @cats = current_user.cats.find_by(id: params[:id])
+    @cats = Cat.find_by(id: params[:id])
     @cats.destroy
     flash[:success] = '猫情報は正常に削除されました'
     redirect_to root_url
