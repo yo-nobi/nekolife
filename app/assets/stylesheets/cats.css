@@ -2,11 +2,14 @@
 /*// They will automatically be included in application.css.*/
 /*// You can use Sass (SCSS) here: http://sass-lang.com/*/
 
-#catshow 
-.text-center {
-  background-color: white;
+#catshow{
+ width: 100%;
 }
 
 .link{
   word-spacing: 15px;
+}
+
+@media only screen and (max-width: 750px) {
+    img { max-width: 100%; }
 }
